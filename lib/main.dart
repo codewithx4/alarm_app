@@ -1,22 +1,22 @@
-// ignore_for_file: depend_on_referenced_packages
+import "package:flutter/material.dart";
+import "package:flutter_local_notifications/flutter_local_notifications.dart";
+import "package:timezone/data/latest.dart";
+import "package:timezone/timezone.dart";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 void main() {
   runApp(AlarmApp());
 }
 
 class AlarmApp extends StatelessWidget {
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  AlarmApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sanmays Alarm App',
+      title: "Sanmay's Alarm App",
       theme: ThemeData(primarySwatch: Colors.blue),
       home: AlarmScreen(flutterLocalNotificationsPlugin),
     );
@@ -26,10 +26,10 @@ class AlarmApp extends StatelessWidget {
 class AlarmScreen extends StatefulWidget {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  AlarmScreen(this.flutterLocalNotificationsPlugin);
+  const AlarmScreen(this.flutterLocalNotificationsPlugin, {super.key});
 
   @override
-  _AlarmScreenState createState() => _AlarmScreenState();
+  State<AlarmScreen> createState() => _AlarmScreenState();
 }
 
 class _AlarmScreenState extends State<AlarmScreen> {
@@ -51,9 +51,9 @@ class _AlarmScreenState extends State<AlarmScreen> {
   }
 
   Future<void> _scheduleAlarm() async {
-    final now = tz.TZDateTime.now(tz.local);
-    final selectedDateTime = tz.TZDateTime(
-      tz.local,
+    final now = TZDateTime.now(local);
+    final selectedDateTime = TZDateTime(
+      local,
       now.year,
       now.month,
       now.day,
@@ -61,19 +61,21 @@ class _AlarmScreenState extends State<AlarmScreen> {
       _selectedTime.minute,
     );
 
-    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'Alarm App Notification Channel',
+    const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      "Alarm App Notification Channel",
+      "Something",
+      "Description",
       importance: Importance.max,
       priority: Priority.high,
     );
-    final platformChannelSpecifics = NotificationDetails(
+    const platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
     );
 
     await widget.flutterLocalNotificationsPlugin.zonedSchedule(
       0,
-      'Alarm',
-      'Wake up Bhai !',
+      "Alarm",
+      "Wake up Bhai !",
       selectedDateTime,
       platformChannelSpecifics,
       androidAllowWhileIdle: true,
@@ -82,21 +84,22 @@ class _AlarmScreenState extends State<AlarmScreen> {
       UILocalNotificationDateInterpretation.absoluteTime,
     );
 
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Alarm set for ${selectedDateTime.toString()} Bro'),
-      ),
-    );
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Alarm set for ${selectedDateTime.toString()} Bro"),
+        ),
+      );
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    tz.initializeTimeZones();
-    final initializationSettingsAndroid =
-    AndroidInitializationSettings('@mipmap/ic_launcher');
-    final initializationSettings = InitializationSettings(
+    initializeTimeZones();
+    const initializationSettingsAndroid =
+    AndroidInitializationSettings("@mipmap/ic_launcher");
+    const initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: null,
     );
@@ -111,23 +114,23 @@ class _AlarmScreenState extends State<AlarmScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Sanmay Alarm App'),
+        title: const Text("Sanmay's Alarm App"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Selected Time: ${_selectedTime.format(context)}',
-              style: TextStyle(fontSize: 20),
+              "Selected Time: ${_selectedTime.format(context)}",
+              style: const TextStyle(fontSize: 20),
             ),
             ElevatedButton(
               onPressed: () => _selectTime(context),
-              child: const Text('Select Time'),
+              child: const Text("Select Time"),
             ),
             ElevatedButton(
               onPressed: () => _scheduleAlarm(),
-              child: const Text('Set Alarm'),
+              child: const Text("Set Alarm"),
             ),
           ],
         ),

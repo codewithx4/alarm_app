@@ -209,7 +209,7 @@ packages:
     source: hosted
     version: "0.5.1"
   timezone:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       name: timezone
       sha256: f60f389b14643ee90a3ab96ae414f77b0472e3817b5b4bf5cc9ce81ec0113f78
