@@ -62,7 +62,6 @@ class _AlarmScreenState extends State<AlarmScreen> {
     );
 
     final androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'Alarm App',
       'Alarm App Notification Channel',
       importance: Importance.max,
       priority: Priority.high,
