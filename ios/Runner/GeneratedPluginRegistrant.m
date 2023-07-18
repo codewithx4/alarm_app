@@ -6,16 +6,16 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<flutter_local_notifications/FlutterLocalNotificationsPlugin.h>)
-#import <flutter_local_notifications/FlutterLocalNotificationsPlugin.h>
+#if __has_include(<path_provider_foundation/PathProviderPlugin.h>)
+#import <path_provider_foundation/PathProviderPlugin.h>
 #else
-@import flutter_local_notifications;
+@import path_provider_foundation;
 #endif
 
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [FlutterLocalNotificationsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterLocalNotificationsPlugin"]];
+  [PathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"PathProviderPlugin"]];
 }
 
 @end

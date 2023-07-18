@@ -1,6 +1,6 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=C:\dev\ftr\flutter
-FLUTTER_APPLICATION_PATH=C:\dev\ftr\alarm_app
+FLUTTER_ROOT=C:\flutter
+FLUTTER_APPLICATION_PATH=C:\Users\ThinkCentre\StudioProjects\test2
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_TARGET=lib\main.dart
 FLUTTER_BUILD_DIR=build
